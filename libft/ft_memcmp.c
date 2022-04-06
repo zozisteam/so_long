@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/11/01 13:04:55 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/30 12:32:48 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	void	*img;
-	void	*mlx;
+	unsigned char		*pdst;
+	unsigned const char	*psrc;
+	size_t				i;
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	i = 0;
+	pdst = (unsigned char *)s1;
+	psrc = (unsigned const char *)s2;
+	while (i < n)
+	{
+		if (pdst[i] != psrc[i])
+			break ;
+		i++;
+	}
+	if (i == n)
+		return (0);
+	return (pdst[i] - psrc[i]);
 }

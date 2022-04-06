@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/10/22 18:39:11 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/23 10:16:02 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strrchr(const char *str, int c)
 {
-	void	*img;
-	void	*mlx;
+	int	end;
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	end = ft_strlen(str);
+	while (end >= 0)
+	{
+		if (str[end] == (char)c)
+			return ((char *)str + end);
+		end--;
+	}
+	return (NULL);
 }

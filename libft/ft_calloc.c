@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/11/12 23:37:16 by zozi              #+#    #+#             */
+/*   Updated: 2021/11/30 09:12:00 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+void	*ft_calloc(size_t count, size_t size)
 {
-	void	*img;
-	void	*mlx;
+	void	*p;
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	p = malloc(count * size);
+	if (!p)
+		return (p);
+	ft_bzero(p, size * count);
+	return (p);
 }

@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/12/06 23:05:02 by alalmazr          #+#    #+#             */
+/*   Updated: 2022/03/25 14:07:07 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_putstr(char *str, int *count)
 {
-	void	*img;
-	void	*mlx;
+	int	i;
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	if (!str)
+	{
+		ft_putstr("(null)", count);
+		return ;
+	}
+	i = 0;
+	while (str[i] != '\0')
+	{
+		ft_putchar(str[i], count);
+		i++;
+	}
 }

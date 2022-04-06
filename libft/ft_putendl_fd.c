@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/11/17 17:58:34 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/18 13:50:10 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_putendl_fd(char *str, int fd)
 {
-	void	*img;
-	void	*mlx;
-
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	ft_putstr_fd(str, fd);
+	ft_putchar_fd('\n', fd);
 }

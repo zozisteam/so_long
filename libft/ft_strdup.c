@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/10/18 09:33:14 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/30 12:31:17 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strdup(const char *src)
 {
-	void	*img;
-	void	*mlx;
+	char	*x;
+	int		i;
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	i = 0;
+	x = (char *)malloc(ft_strlen(src) + 1);
+	if (!x)
+		return (NULL);
+	while (src[i] != '\0')
+	{
+		x[i] = src[i];
+		i++;
+	}
+	x[i] = '\0';
+	return (x);
 }

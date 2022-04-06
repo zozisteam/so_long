@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/10/30 18:55:10 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/28 15:07:04 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	void	*img;
-	void	*mlx;
+	size_t			i;
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	i = 0;
+	while (i < n)
+	{
+		if ((unsigned char)(((char *)s)[i]) == (unsigned char)c)
+			return ((void *) &s[i]);
+		i++;
+	}
+	return (NULL);
 }

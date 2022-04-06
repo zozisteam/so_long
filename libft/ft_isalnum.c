@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/10/18 10:39:33 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/10 18:21:46 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
-
-int	main(void)
+int	ft_isalnum(int ch)
 {
-	void	*img;
-	void	*mlx;
-
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	if ((ch >= 48 && ch <= 57) || (ch >= 65
+			&& ch <= 90) || (ch >= 97 && ch <= 122))
+		return (1);
+	return (0);
 }

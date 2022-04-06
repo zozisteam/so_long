@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/10/22 18:02:34 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/10 18:19:48 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
-
-int	main(void)
+int	ft_isprint(int c)
 {
-	void	*img;
-	void	*mlx;
-
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	if (c >= 32 && c < 127)
+		return (1);
+	return (0);
 }

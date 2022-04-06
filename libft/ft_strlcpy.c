@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/10/24 12:13:44 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/27 14:52:38 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	void	*img;
-	void	*mlx;
+	size_t	i;
+	size_t	len;
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	len = (size_t)ft_strlen(src);
+	i = 0;
+	if (dstsize > 0)
+	{
+		while (i < dstsize - 1)
+		{
+			if (*src != '\0')
+			{
+				*dst++ = *src++;
+			}
+			else
+				break ;
+			i++;
+		}
+		*dst = '\0';
+	}
+	return (len);
 }

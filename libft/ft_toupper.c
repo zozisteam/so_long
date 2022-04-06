@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/10/18 09:39:45 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/17 18:04:42 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
-
-int	main(void)
+int	ft_toupper(int ch)
 {
-	void	*img;
-	void	*mlx;
-
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	if (ch >= 97 && ch <= 122)
+		return (ch - 32);
+	return (ch);
 }

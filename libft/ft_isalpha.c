@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:19 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/10/18 09:35:54 by alalmazr          #+#    #+#             */
+/*   Updated: 2021/11/18 11:16:23 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "libft.h"
 
-int	main(void)
+int	ft_isalpha(int c)
 {
-	void	*img;
-	void	*mlx;
-
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+	if (c < 'A' || (c > 'Z' && c < 'a') || c > 'z')
+		return (0);
+	return (1);
 }
