@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/04/19 18:24:26 by apple            ###   ########.fr       */
+/*   Updated: 2022/04/19 21:23:33 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,16 @@ char	**init_map(t_game *game, int argc, char **argv)
 /* This function use count function above. */
 int	count_lines(char *path, t_map *o_map)
 {
-	int	file;
-	int	count_lines;
+	int	fd;
+	int	linecount;
 	int	count_length;
 
-	file = open(path, O_RDONLY);
-	if (file < 0)
-	{
-		printf("Error\n    Error in file\n");
-		return (0);
-	}
-	
-	
+	fd = open(path, O_RDONLY);
+	linecount = 0;
+	while (getnextline(fd))
+		linecount++;
+	close(fd);
+	return (linecount);
 }
 
 /* Allocates n space in the memory for a array with lines  */
