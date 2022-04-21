@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_check.c                                        :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/04/19 21:23:33 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/04/21 06:29:27 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
-/* check argc and the map extension */
-int	valid_map(int argc, char *map_file)
+void free_map(char **map, t_map *o_map)
 {
-	if (argc == 1)
-	{
-		printf("\033[31;1;4m" " Error\n    No map file\n" "\033[0m");
-		return (0);
-	}
-	if (check_extension(map_file, ".ber") <= 0)
-	{
-		printf("\033[31;1;4m" " Wrong file extension\n    No map file\n" "\033[0m");
-		return (0);
-	}
-		if (argc > 2)
-	{
-		printf("\033[0;33m" " Warning\n Only first file will be used\n" "\033[0m");
-	}
-	return (1);
+	int i;
+
+	i = 0;
+	while (i <= o_map->line)
+		free(map[i++]);
+	free(map);
 }
 
 void init_map0(t_map *map)
@@ -41,7 +30,7 @@ void init_map0(t_map *map)
 	map->check.player = 0;
 	map->end_col = 0;
 	map->column = 0;
-	map->item_bup = 0;
+	//map->item_bup = 0;
 	map->line = 0;
 	map->valid = 1;
 }
@@ -71,14 +60,52 @@ int	count_lines(char *path, t_map *o_map)
 {
 	int	fd;
 	int	linecount;
-	int	count_length;
 
 	fd = open(path, O_RDONLY);
 	linecount = 0;
 	while (getnextline(fd))
 		linecount++;
+	o_map->line = linecount;
 	close(fd);
+	if (linecount <= 0)
+	{
+		o_map->valid = 0;
+		return (0);
+	}
+	o_map->valid = 1;
 	return (linecount);
+}
+
+int	count_len(char *path, t_map *o_map)
+{
+	int	fd;
+	int	lencount;
+	char *line;
+	int i;
+	int valid;
+
+	fd = open(path, O_RDONLY);
+	lencount = 0;
+	valid = 1;
+	line = get_next_line(fd);
+	i = 0;
+	while(i < o_map->line)
+	{
+		if (ft_strlen(line) != ft_strlen(get_next_line(fd)))
+			valid = 0;
+		if (i == (o_map->line - 1) && ft_strlen(line) == (ft_strlen(get_next_line(fd) - 1)))
+			valid = 1;
+		i++;
+	}
+	if (valid == 0)
+	{
+		ft_printf("invalid map\n");
+		return (0);
+	}
+	o_map->column = ft_strlen(line);
+	o_map->valid = 0;
+	close(fd);
+	return (ft_strlen(line));
 }
 
 /* Allocates n space in the memory for a array with lines  */
@@ -87,6 +114,7 @@ static char	**map_malloc(char *path, t_map *o_map)
 	char	**map;
 
 	o_map->line = count_lines(path, o_map);
+	o_map->column = count_len(path, o_map);
 	if (o_map->valid <= 0)
 		return (0); //invalid map
 	if (o_map->line <= 0)
@@ -105,14 +133,29 @@ char	**read_map(char *path, t_map *o_map)
 	int		file;
 	int		lines;
 	char	**map;
+	int		i;
 
 	map = map_malloc(path, o_map);
+	if(!map)
+		return (0);
 	lines = 0;
+	i = 0;
 	file = open(path, O_RDONLY);
 	//count how many lines (loop gnl and update lines)
-	//check last line idk why
-	//create a backup map (ignore it for now)
-	//if invalid map->valid then free the map and return error invalid map
+	while (i < o_map->line)
+	{
+		map[i] = get_next_line(file);
+		i++;
+	}
+	map[i] = NULL;
+	check_walls(map, o_map);
+	//do i need backup map? if so do it here
+	if (o_map->valid == 0)
+	{
+		free_map(**map, o_map);
+		printf("Error\n		Invalid map\n");
+		return (0);
+	}
 	close(file);
 	return (map);
 }

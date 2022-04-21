@@ -1,12 +1,21 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+//defining paths
+# define PATH_WALL "path"
+# define PATH_EMPTY ""
+# define PATH_EXIT ""
+# define PATH_PLAYER_DOWN ""
+# define PATH_PLAYER_UP "./images/WHATEVER.xpm"
+# define PATH_PLAYER_RIGHT ""
+# define PATH_PLAYER_LEFT ""
+# define PATH_ITEM ""
 //defining keys
-# define TOP 0x77
+# define UP 0x77
 # define DOWN 0x73
 # define LEFT 0x61
 # define RIGHT 0x64
 # define ESC 0xff1b
-# define RESET 0x72
 
 # define TILES 50
 
@@ -34,15 +43,15 @@ typedef struct s_map_check
 typedef struct s_map
 {
 	t_pos		player;
-	t_pos		player_bup;
+	//t_pos		player_bup;
 	int			valid;
 	int			end_col;
 	int			column;
 	int			line;
 	t_map_check	check;
-	int			item_bup;
+	//int			item_bup;
 	char		**map;
-	char		**backup_map;
+//	char		**backup_map;
 }				t_map;
 
 typedef struct s_data
@@ -59,7 +68,7 @@ typedef struct s_data
 typedef struct s_side
 {
 	t_data	down;
-	t_data	top;
+	t_data	up;
 	t_data	left;
 	t_data	right;
 }				t_side;
@@ -83,18 +92,32 @@ typedef struct s_game
 	int		end_game;
 	int		steps;
 	int		init_game;
-	double	reset;
+//	double	reset;
 	int		side;
 }				t_game;
 
 //utils
 
-//map functions + printing
+//map functions
+void	print_map(t_game *game);
+void	print_sprites(t_game *game, int line, int column);
+void	print_map(t_game *game);
+
+//image shit
+t_img	put_image(void *mlx);
+
 
 //initializing functions
 
-//games
+//game
+void	initialize_game(t_game *game);
+int	start_game(t_game *game, int argc, char **argv);
 
 //errors
+
+//hooks
+int	close_window(t_game *game);
+int	action(int keycode, t_game *game);
+int	update(t_game *game);
 
 #endif

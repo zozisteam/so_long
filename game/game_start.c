@@ -1,21 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_init.c                                        :+:      :+:    :+:   */
+/*   game_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:55:34 by apple             #+#    #+#             */
-/*   Updated: 2022/04/17 20:53:01 by apple            ###   ########.fr       */
+/*   Updated: 2022/04/21 06:21:05 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+void	initialize_game(t_game *game)
+{
+	game->side = 0;
+	//game->reset = 0;
+	game->end_game = 0;
+	game->steps = 0;
+	game->init_game = 0;
+}
 
+/* Init the map if is valid and store in a char **map */
+char	**start_map(t_game *game, int argc, char **argv)
+{
+	char **map;
+
+	if(!valid_map(argc, argv[1]))
+		return (0);
+	map = read_map(argv[1], &game->map);
+	if (!map)
+	{
+		printf("invalid map\n");
+		return (0);
+	}
+	return (map);
+}
 
 /* Init the window of game */
-void	init_window(t_game *game)
+void	start_window(t_game *game)
 {
 	int x;
 	int y;
@@ -29,7 +52,7 @@ void	init_window(t_game *game)
 
 
 /* Init the game starting the window and the map */
-int	init_game(t_game *game, int argc, char **argv)
+int	start_game(t_game *game, int argc, char **argv)
 {
 	t_map	map;
 
@@ -38,8 +61,8 @@ int	init_game(t_game *game, int argc, char **argv)
 	game->map.map = init_map(game, argc, argv);
 	if (game->map.map == NULL)
 		return (-1);
-	init_window(game);
-	game->img = init_image(game->mlx);
+	start_window(game);
+	game->img = put_image(game->mlx);
 	game->side = DOWN;
 	print_map(game);
 	game->init_game = 1;
