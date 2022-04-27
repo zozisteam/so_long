@@ -2,7 +2,7 @@
 # define SO_LONG_H
 
 //defining paths
-# define PATH_WALL "path"
+# define PATH_WALL "./src/img_files/"
 # define PATH_EMPTY ""
 # define PATH_EXIT ""
 # define PATH_PLAYER_DOWN ""
@@ -58,7 +58,6 @@ typedef struct s_img_data
 	char	*pixel;
 	t_pos	pos;
 	t_pos	size;
-	//int		bpp;
 	int		line_size;
 	int		endian;
 }				t_img_data;
@@ -93,7 +92,6 @@ typedef struct s_game
 	int		side;
 }				t_game;
 
-
 //mlx
 t_img	put_image(void *mlx);
 void	start_window(t_game *game);
@@ -109,7 +107,7 @@ void	display_game_text(t_game *game);
 void	delete_player(t_game *game);
 //map
 char	**start_map(t_game *game, int argc, char **argv);
-void 	map_start_struct(t_map *map);
+void	map_start_struct(t_map *map);
 char	**read_map(char *path, t_map *map_struct);
 void	print_map(t_game *game);
 //map check
@@ -118,7 +116,7 @@ int		check_args(int argc, char *map_file);
 //map utils
 char	**map_malloc(char *path, t_map *map_struct);
 int		map_player(t_map *map, int line, int col);
-int		valid_map_char(char c)
+int		valid_map_char(char c);
 
 //hooks
 int		close_window(t_game *game);
