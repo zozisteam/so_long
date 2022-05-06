@@ -6,15 +6,15 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:33:42 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/05 04:24:39 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 21:54:33 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void free_map(char **map, t_map *map_struct)
+void	free_map(char **map, t_map *map_struct)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i <= map_struct->line)
@@ -30,16 +30,18 @@ int	close_window(t_game *game)
 	exit(0);
 }
 
-int error_msg(char *msg)
+int	error_msg(char *msg)
 {
 	ft_printf("Error\n*%s*\n", msg);
 	return (0);
 }
 
 //***under process
-void	delete_player(t_game *game)
+void	end_game(t_game *game)
 {
-	game->map.map[game->map.player.y][game->map.player.x] = '0';
-	//game->side = DOWN;
-	print_map(game);
+	if (game->finish)
+		ft_printf("you win :)\n");
+	else
+		ft_printf("you lose :(\n");
+	close_window(game);
 }

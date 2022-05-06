@@ -6,16 +6,16 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:31:24 by apple             #+#    #+#             */
-/*   Updated: 2022/05/05 04:04:42 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:01:10 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int check_elements(t_map *map)
+int	check_elements(t_map *map)
 {
-	int line;
-	int col;
+	int	line;
+	int	col;
 
 	line = 0;
 	while (map->map[line][0] != 0)
@@ -24,7 +24,7 @@ int check_elements(t_map *map)
 		while (map->map[line][col] != 0 && map->map[line][col] != '\n')
 		{
 			if (map->map[line][col] == 'P')
-				player_starting_pos(&map, line, col);
+				player_starting_pos(map, line, col);
 			if (map->map[line][col] == 'C')
 				map->check.collect++;
 			if (map->map[line][col] == 'E')
@@ -38,9 +38,9 @@ int check_elements(t_map *map)
 	return (1);
 }
 
-int verify_elements(t_map *map)
+int	verify_elements(t_map *map)
 {
-	int valid;
+	int	valid;
 
 	valid = 1;
 	if (map->check.exit < 1)
@@ -52,34 +52,24 @@ int verify_elements(t_map *map)
 	return (valid);
 }
 
-int check_extension(char *map_file, char ext)
+int	check_extension(char *map_file)
 {
-
-}
-
-/* check argc and the map extension */
-int	check_args(int argc, char *map_file)
-{
-	if (argc == 1)
-		return (error_msg("no map file :("));
-	if (check_extension(map_file, ".ber") <= 0)
-		return (error_msg("wrong file extension :( no map file"));
-	if (argc > 2)
-		ft_printf("warning\nonly first file will be used\n");
+	(void)(map_file);
+	//do strstr but make sure that after ".ber" its a null byte
 	return (1);
 }
 
-int check_walls_helper(char *map_line, int specifier)
+int	check_walls_helper(char *map_line, int line)
 {
-	int i;
+	unsigned int	i;
 
 	i = 0;
-	if (specifier == 0) //middle lines
+	if (line == 0) //middle lines
 	{
 		if (map_line[0] != '1' && map_line[ft_strlen(map_line) - 1] != '1')
 			return (0);
 	}
-	if (specifier == 1) //first/last line
+	if (line == 1) //first/last line
 	{
 		while (i < ft_strlen(map_line))
 		{
@@ -91,10 +81,10 @@ int check_walls_helper(char *map_line, int specifier)
 	return (1);
 }
 
-int check_walls(char **map, t_map *map_struct)
+int	check_walls(char **map, t_map *map_struct)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < map_struct->line)
 	{

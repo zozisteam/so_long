@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/05/05 03:47:28 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:02:34 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-void map_start_struct(t_map *map)
+void	map_start_struct(t_map *map)
 {
 	map->check.collect = 0;
 	map->check.exit = 0;
@@ -21,6 +21,18 @@ void map_start_struct(t_map *map)
 	map->column = 0;
 	map->line = 0;
 	map->valid = 1;
+}
+
+/* check argc and the map extension */
+int	check_args(int argc, char *map_file)
+{
+	if (argc == 1)
+		return (error_msg("no map file :("));
+	if (check_extension(map_file) == 0)
+		return (error_msg("wrong file extension :( no map file"));
+	if (argc > 2)
+		ft_printf("warning\nonly first file will be used\n");
+	return (1);
 }
 
 /* read the map by gnl and storing it into **map */
@@ -32,7 +44,7 @@ char	**read_map(char *path, t_map *map_struct)
 	int		i;
 
 	map = map_malloc(path, map_struct);
-	if(!map)
+	if (!map)
 		return (0);
 	i = 0;
 	fd = open(path, O_RDONLY);
@@ -44,10 +56,11 @@ char	**read_map(char *path, t_map *map_struct)
 	}
 	map[i] = NULL;
 	check_walls(map, map_struct);
-	if (map_struct->valid == 0)
+	if (!map_struct->valid)
 	{
-		free_map(**map, map_struct);
-		return (error_msg("invalid map :("));
+		free_map(map, map_struct);
+		error_msg("invalid map :(");
+		return (0);
 	}
 	close(fd);
 	return (map);
@@ -60,9 +73,9 @@ char	**start_map(t_game *game, int argc, char **argv)
 	char	**map;
 
 	if (!check_args(argc, argv[1]))
-		return (error_msg("invalid map :("));
+		return (0);
 	map = read_map(argv[1], &game->map);
 	if (!map)
-		return (error_msg("error in map creation"));
+		return (0);
 	return (map);
 }

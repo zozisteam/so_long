@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 18:51:29 by alalmazr          #+#    #+#             */
-/*   Updated: 2021/11/28 14:33:09 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:39:54 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int	ft_strncmp(const char *str1, const char *str2, size_t n)
+int	ft_strncmp( char *str1,  char *str2, size_t n)
 {
 	unsigned int	i;
 

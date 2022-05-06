@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:46:13 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/05 04:42:03 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:34:08 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	update_direction(int key, t_game *game)
 	//game->side = key;
 }
 
-int can_move(t_game *game, int line, int col, int key)
+int	can_move(t_game *game, int line, int col, int key)
 {
 	if (key != UP && key != DOWN && key != LEFT && key != RIGHT)
 		return (0);
@@ -43,17 +43,16 @@ int can_move(t_game *game, int line, int col, int key)
 		return (1);
 }
 
-void	move_player(t_game *game, int line, int col, int key) //*******
+void	move_player(t_game *game, int line, int col, int key)
 {
 	int	y;
 	int	x;
-	int	valid;
-
+	//*******
 	y = game->map.player.y;
 	x = game->map.player.x;
 	//update where player is facing depending on key pressed (maybe needs change bcz redund)
 	update_direction(key, game);
-	if (can_move(&game, line, col, key) && !game->finish) //maybe make this diff function move(valid, ...)
+	if (can_move(game, line, col, key) && !game->finish)
 	{
 		if (game->map.map[line][col] == 'C')
 			game->map.check.collect--; //if we move to collectible we decrement
@@ -65,8 +64,6 @@ void	move_player(t_game *game, int line, int col, int key) //*******
 	}
 }
 
-/* Handle the events of the game and call a auxiliary function */
-/* to make an key_event_handler */
 int	key_event_handler(int key, t_game *game)
 {
 	int	line;
@@ -85,7 +82,7 @@ int	key_event_handler(int key, t_game *game)
 	if (key == LEFT)
 		col--;
 	if (!game->finish)
-		move_player(&game, line, col, key);
+		move_player(game, line, col, key);
 	return (1);
 }
 

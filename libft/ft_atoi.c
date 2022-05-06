@@ -6,14 +6,14 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:07:08 by alalmazr          #+#    #+#             */
-/*   Updated: 2021/11/30 12:30:37 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:39:54 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "limits.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi( char *str)
 {
 	size_t	result;
 	int		i;

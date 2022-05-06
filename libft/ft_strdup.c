@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 09:33:14 by alalmazr          #+#    #+#             */
-/*   Updated: 2021/11/30 12:31:17 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:39:54 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup( char *src)
 {
 	char	*x;
 	int		i;

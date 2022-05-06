@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:55:34 by apple             #+#    #+#             */
-/*   Updated: 2022/05/05 04:03:14 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:47:44 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	game_start_struct(t_game *game)
 	game->init_game = 0;
 }
 
-
 /* start game by creating t_map variable and initializing it */
 /* to put it into game struct.. then open window and start printing*/
 int	start_game(t_game *game, int argc, char **argv)
@@ -34,7 +33,7 @@ int	start_game(t_game *game, int argc, char **argv)
 	if (game->map.map == NULL)
 		return (-1);
 	check_elements(&map);
-	if (!verify_elements(map))
+	if (!verify_elements(&map))
 		return (-1);
 	start_window(game);
 	game->img = put_image(game->mlx);

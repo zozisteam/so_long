@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 09:29:33 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/03/25 14:07:18 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:39:54 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	void	printfprocess(const char *format, va_list args,
+static	void	printfprocess( char *format, va_list args,
 							int *res, int *i)
 {
 	if (format[*i] == '%')
@@ -34,7 +34,7 @@ static	void	printfprocess(const char *format, va_list args,
 		ft_hexconv(va_arg(args, unsigned int), format[*i], res);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf( char *format, ...)
 {
 	va_list	args;
 	int		res;

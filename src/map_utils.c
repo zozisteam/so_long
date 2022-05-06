@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:27:51 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/05 04:01:02 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:19:34 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	map_count_lines(char *path, t_map *map_struct)
 
 	fd = open(path, O_RDONLY);
 	linecount = 0;
-	while (getnextline(fd))
+	while (get_next_line(fd))
 		linecount++;
 	map_struct->line = linecount;
 	close(fd);
@@ -41,30 +41,21 @@ int	map_count_lines(char *path, t_map *map_struct)
 /*  */
 int	map_count_columns(char *path, t_map *map_struct)
 {
-	int	fd;
-	int	lencount;
-	char *line;
-	int i;
-	int valid;
+	int		fd;
+	char	*line;
+	int		i;
 
 	fd = open(path, O_RDONLY);
-	lencount = 0;
-	valid = 1;
 	line = get_next_line(fd);
 	i = 1;
-	while(i < map_struct->line)
+	while (i < map_struct->line)
 	{
 		if (ft_strlen(line) != ft_strlen(get_next_line(fd)))
-		{
-			valid = 0;
-			break;
-		}
+			return (error_msg("invalid map :( check map columns"));
 		i++;
-	}
-	if (valid == 0)
-		return (error_msg("invalid map :( check map columns"));
+	}	
 	map_struct->column = ft_strlen(line);
-	map_struct->valid = 0;
+	map_struct->valid = 1;
 	close(fd);
 	return (ft_strlen(line));
 }
@@ -87,16 +78,16 @@ char	**map_malloc(char *path, t_map *map_struct)
 	return (map);
 }
 
-int player_starting_pos(t_map *map, int line, int col)
+void	player_starting_pos(t_map *map, int line, int col)
 {
-   		map->check.player++;
-		map->player.x = col;
-		map->player.y = line;
+	map->check.player++;
+	map->player.x = col;
+	map->player.y = line;
 }
 
 int	valid_map_element(char c)
 {
-	if (c == '1' || c == '0' ||  c == 'P' || c == 'C' || c == 'E')
+	if (c == '1' || c == '0' || c == 'P' || c == 'C' || c == 'E')
 		return (1);
 	return (0);
 }
