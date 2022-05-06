@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/04/27 06:58:43 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/05 03:47:28 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,19 @@ void map_start_struct(t_map *map)
 /* then we check the walls of the map for '1's */
 char	**read_map(char *path, t_map *map_struct)
 {
-	int		file;
-	int		lines;
+	int		fd;
 	char	**map;
 	int		i;
 
 	map = map_malloc(path, map_struct);
 	if(!map)
 		return (0);
-	lines = 0;
 	i = 0;
-	file = open(path, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	//count how many lines (loop gnl and update lines)
 	while (i < map_struct->line)
 	{
-		map[i] = get_next_line(file);
+		map[i] = get_next_line(fd);
 		i++;
 	}
 	map[i] = NULL;
@@ -51,7 +49,7 @@ char	**read_map(char *path, t_map *map_struct)
 		free_map(**map, map_struct);
 		return (error_msg("invalid map :("));
 	}
-	close(file);
+	close(fd);
 	return (map);
 }
 

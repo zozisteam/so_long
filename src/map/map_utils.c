@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:27:51 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/27 07:00:25 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/05 04:01:02 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,16 @@ char	**map_malloc(char *path, t_map *map_struct)
 	return (map);
 }
 
-int map_player(t_map *map, int line, int col)
+int player_starting_pos(t_map *map, int line, int col)
 {
    		map->check.player++;
 		map->player.x = col;
 		map->player.y = line;
 }
 
-int	valid_map_char(char c)
+int	valid_map_element(char c)
 {
-	if (c == '1' || c == '0' ||  c == 'P' || c == 'C' || c == 'E' || c == 'V')
+	if (c == '1' || c == '0' ||  c == 'P' || c == 'C' || c == 'E')
 		return (1);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 05:56:43 by apple             #+#    #+#             */
-/*   Updated: 2022/04/27 05:21:36 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/05 04:12:57 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-/* Init the window of game */
+/*start the window using mlx_init and mlx_new_win*/
 void	start_window(t_game *game)
 {
 	int x;
@@ -26,17 +26,16 @@ void	start_window(t_game *game)
 
 t_img	put_image(void *mlx)
 {
-	t_img *img; //make sure this as a pointer is working or t_img img;
+	t_img *img;
 
 	img->wall.img = mlx_xpm_file_to_image(mlx, PATH_WALL, &img->wall.size.x, &img->wall.size.y);//decrease variable sizes in naming
-	//img->wall.bpp = mlx_get_data_addr(img->wall.img, &img->wall.bpp, &img->wall.line_size, &img->wall.endian);
 	img->emp.img = mlx_xpm_file_to_image(mlx, PATH_EMPTY, &img->emp.size.x, &img->emp.size.y);
 	img->exit.img = mlx_xpm_file_to_image(mlx, PATH_EXIT, &img->exit.size.x, &img->exit.size.y);
 	img->item.img = mlx_xpm_file_to_image(mlx, PATH_ITEM, &img->item.size.x, &img->item.size.y);
 	img->player.down.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN, &img->player.down.size.x, &img->player.down.size.y);
-	img->player.left.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_LEFT, &img->player.left.size.x, &img->player.left.size.y);
 	img->player.up.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_UP, &img->player.up.size.x, &img->player.up.size.y);
-	img->player.down.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN, &img->player.down.size.x, &img->player.down.size.y);
+	img->player.left.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_LEFT, &img->player.left.size.x, &img->player.left.size.y);
+	img->player.right.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN, &img->player.right.size.x, &img->player.right.size.y);
 	return (*img);
 }
 
@@ -70,8 +69,6 @@ void	print_sprites(t_game *game, int line, int column)
 		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.emp, x, y);
 	if (&game->map.map[line][column] == 'E')
 		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.exit, x, y);
-	if (&game->map.map[line][column] == 'V')
-		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.enemy, x, y);
 	if (&game->map.map[line][column] == 'C')
 		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.item, x, y);
 }

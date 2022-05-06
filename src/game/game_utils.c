@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:33:42 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/04/27 07:00:33 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/05 04:24:39 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void free_map(char **map, t_map *map_struct)
 int	close_window(t_game *game)
 {
 	free_map(game->map.map, &game->map);
+	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
-	//mlx_destroy_window(game->mlx, game->win);
 }
 
 int error_msg(char *msg)
 {
 	ft_printf("Error\n*%s*\n", msg);
-	return (-1);
+	return (0);
 }
 
 //***under process

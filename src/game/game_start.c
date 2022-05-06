@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:55:34 by apple             #+#    #+#             */
-/*   Updated: 2022/04/27 07:02:24 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/05 04:03:14 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	start_game(t_game *game, int argc, char **argv)
 	game->map.map = start_map(game, argc, argv);
 	if (game->map.map == NULL)
 		return (-1);
-	check(map);
-	if (!verify(map))
+	check_elements(&map);
+	if (!verify_elements(map))
 		return (-1);
 	start_window(game);
 	game->img = put_image(game->mlx);

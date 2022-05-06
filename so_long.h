@@ -2,7 +2,7 @@
 # define SO_LONG_H
 
 //defining paths
-# define PATH_WALL "./src/img_files/"
+# define PATH_WALL "path"
 # define PATH_EMPTY ""
 # define PATH_EXIT ""
 # define PATH_PLAYER_DOWN ""
@@ -17,8 +17,8 @@
 # define RIGHT 0x64
 # define ESC 0xff1b
 
-//my xml images are 100*100
-# define TILES 100
+//my xpm images are 50*50
+# define TILES 50
 
 # include "./mlx/mlx.h"
 # include <unistd.h>
@@ -92,14 +92,15 @@ typedef struct s_game
 	int		side;
 }				t_game;
 
+
 //mlx
-t_img	put_image(void *mlx);
 void	start_window(t_game *game);
+t_img	put_image(void *mlx);
 void	print_sprites(t_game *game, int line, int column);
 
 //game
-int		start_game(t_game *game, int argc, char **argv);
 void	game_start_struct(t_game *game);
+int		start_game(t_game *game, int argc, char **argv);
 //game utils
 void	free_map(char **map, t_map *map_struct);
 int		error_msg(char *msg);
@@ -107,19 +108,22 @@ void	display_game_text(t_game *game);
 void	delete_player(t_game *game);
 //map
 char	**start_map(t_game *game, int argc, char **argv);
-void	map_start_struct(t_map *map);
+void 	map_start_struct(t_map *map);
 char	**read_map(char *path, t_map *map_struct);
 void	print_map(t_game *game);
 //map check
 int		check_walls(char **map, t_map *map_struct);
 int		check_args(int argc, char *map_file);
+int		check_elements(t_map *map);
+int		verify(t_map *map);
 //map utils
 char	**map_malloc(char *path, t_map *map_struct);
-int		map_player(t_map *map, int line, int col);
-int		valid_map_char(char c);
+int		player_starting_pos(t_map *map, int line, int col);
+int		valid_map_element(char c)
 
 //hooks
 int		close_window(t_game *game);
 int		key_event_handler(int keycode, t_game *game);
+int		update(t_game *game)
 
 #endif
