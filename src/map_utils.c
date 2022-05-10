@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:27:51 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/07 04:36:53 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:26:00 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	map_count_columns(char *path, t_map *map_struct)
 	while (i < map_struct->line)
 	{
 		if (ft_strlen(line) != ft_strlen(get_next_line(fd)))
-			return (error_msg("invalid map :( check map columns", &map_struct));
+			return (error_msg("invalid map :( check map columns", map_struct));
 		i++;
 	}	
 	map_struct->column = ft_strlen(line);

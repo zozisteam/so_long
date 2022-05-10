@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:31:24 by apple             #+#    #+#             */
-/*   Updated: 2022/05/07 04:33:34 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:32:02 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int	verify_elements(t_map *map)
 
 	valid = 1;
 	if (map->exit < 1)
-		valid = error_msg("make sure there is at least 1 exit", &map);
+		valid = error_msg("make sure there is at least 1 exit", map);
 	if (map->collect < 1)
-		valid = error_msg("make sure there is at least 1 collectible", &map);
+		valid = error_msg("make sure there is at least 1 collectible", map);
 	if (map->player_count != 1)
-		valid = error_msg("only 1 player allowed", &map);
+		valid = error_msg("only 1 player allowed", map);
 	return (valid);
 }
 
@@ -57,9 +57,9 @@ check from len(file) - 4 (which should give last 4 char that
 should == ".ber" in the end)*/
 int	check_extension(char *map_file, char *ext)
 {
-	int	file_len;
-	int	offset;
-	int i;
+	int		file_len;
+	int		offset;
+	size_t	i;
 
 	i = 0;
 	file_len = ft_strlen(map_file);
@@ -109,11 +109,11 @@ int	check_walls(char **map, t_map *map_struct)
 		if (i == 0 || i == map_struct->line - 1) //if first or last line
 		{
 			if (!check_walls_helper(map[i], 1))
-				return (error_msg("inavlid map :( check walls", &map_struct));
+				return (error_msg("inavlid map :( check walls", map_struct));
 		}
 		else
 			if (!check_walls_helper(map[i], 0)) // if middle lines
-				return (error_msg("inavlid map :( check walls", &map_struct));
+				return (error_msg("inavlid map :( check walls", map_struct));
 		i++;
 	}
 	map_struct->valid = 1;

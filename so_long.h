@@ -54,12 +54,7 @@ typedef struct s_img
 	t_pos	size;
 }				t_img;
 
-typedef struct s_player_direction
-{
-//
-}				t_player_direction;
-
-typedef struct s_img
+typedef struct s_all_imgs
 {
 	t_img	wall;
 //	t_img	emp;
@@ -73,44 +68,45 @@ typedef struct s_img
 
 typedef struct s_game
 {
-	void	*mlx;
-	void	*win;
-	t_map	map;
+	void		*mlx;
+	void		*win;
+	t_map		map;
 	t_all_imgs	img;
-	int		finish;
-	int		steps;
-	int		init_game;
-	int		side;
+	int			finish;
+	int			steps;
+	int			init_game;
+	int			side;
 }				t_game;
 //hooks
-int		close_window(t_game *game);
-int		key_event_handler(int keycode, t_game *game);
-int		update(t_game *game);
+int			close_window(t_game *game);
+int			key_event_handler(int keycode, t_game *game);
+int			update(t_game *game);
 //mlx
-void	start_window(t_game *game);
+void		start_window(t_game *game);
 t_all_imgs	put_image(void *mlx);
-void	print_sprites(t_game *game, int line, int column);
+void		print_sprites(t_game *game, int line, int column);
 //game
-void	game_start_struct(t_game *game);
-int		start_game(t_game *game, int argc, char **argv);
+void		game_start_struct(t_game *game);
+int			game_start(t_game *game, int argc, char **argv);
 //game utils
-void	free_map(char **map, t_map *map_struct);
-int		error_msg(char *msg, t_map *map_struct);
-void	display_game_text(t_game *game);
-void	end_game(t_game *game);
+void		free_map(char **map, t_map *map_struct);
+int			error_msg(char *msg, t_map *map_struct);
+void		display_game_text(t_game *game);
+void		end_game(t_game *game);
 //map
-char	**start_map(t_game *game, int argc, char **argv);
-void	map_start_struct(t_map *map);
-char	**read_map(char *path, t_map *map_struct);
-void	print_map(t_game *game);
+char		**start_map(t_game *game, int argc, char **argv);
+void		map_start_struct(t_map *map);
+char		**read_map(char *path, t_map *map_struct);
+void		print_map(t_game *game);
 //map check
-int		check_walls(char **map, t_map *map_struct);
-int		check_args(int argc, char *map_file);
-int		check_elements(t_map *map);
-int		verify_elements(t_map *map);
+int			check_walls(char **map, t_map *map_struct);
+int			check_args(int argc, char *map_file);
+int			check_elements(t_map *map);
+int			verify_elements(t_map *map);
+int			check_extension(char *map_file, char *ext);
 //map utils
-char	**map_malloc(char **map, char *path, t_map *map_struct);
-void	player_starting_pos(t_map *map, int line, int col);
-int		valid_map_element(char c);
+char		**map_malloc(char **map, char *path, t_map *map_struct);
+void		player_starting_pos(t_map *map, int line, int col);
+int			valid_map_element(char c);
 
 #endif

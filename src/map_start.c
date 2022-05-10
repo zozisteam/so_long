@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/05/07 04:50:15 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:36:28 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_args(int argc, char *map_file)
 {
 	if (argc == 1)
 		return (error_msg("no map file :(", 0));
-	if (check_extension(map_file) == 0)
+	if (check_extension(map_file, ".ber") == 0)
 		return (error_msg("wrong file extension :( no map file", 0));
 	if (argc > 2)
 		ft_printf("warning\nonly first file will be used\n");
@@ -42,7 +42,8 @@ char	**read_map(char *path, t_map *map_struct)
 	char	**map;
 	int		i;
 
-	map_malloc(&map, path, map_struct);
+	map = NULL;
+	map_malloc(map, path, map_struct);
 	if (!map)
 		return (0);
 	i = 0;
@@ -57,7 +58,7 @@ char	**read_map(char *path, t_map *map_struct)
 	if (!map_struct->valid)
 	{
 		free_map(map, map_struct);
-		error_msg("invalid map :(", &map_struct);
+		error_msg("invalid map :(", map_struct);
 		return (0);
 	}
 	close(fd);
