@@ -34,34 +34,25 @@ typedef struct s_position
 	int	y;
 }				t_pos;
 
-typedef struct s_map_check
-{
-	int	player;
-	int	exit;
-	int	collect;
-}				t_map_check;
-
 typedef struct s_map
 {
 	t_pos		player;
 	int			valid;
-	int			end_col;
 	int			column;
 	int			line;
-	t_map_check	check;
 	char		**map;
+	int			player_count;
+	int			exit;
+	int			collect;
 }				t_map;
 
 //maybe no need
-typedef struct s_img_data
+typedef struct s_img
 {
 	void	*img;
-	char	*pixel;
 	t_pos	pos;
 	t_pos	size;
-	int		line_size;
-	int		endian;
-}				t_img_data;
+}				t_img;
 
 typedef struct s_player_direction
 {
@@ -70,22 +61,22 @@ typedef struct s_player_direction
 
 typedef struct s_img
 {
-	t_img_data	wall;
-	t_img_data	emp;
-	t_img_data	exit;
-	t_img_data	pdown;
-	t_img_data	pup;
-	t_img_data	pleft;
-	t_img_data	pright;
-	t_img_data	item;
-}				t_img;
+	t_img	wall;
+//	t_img	emp;
+	t_img	exit;
+	t_img	pdown;
+	t_img	pup;
+	t_img	pleft;
+	t_img	pright;
+	t_img	item;
+}				t_all_imgs;
 
 typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
 	t_map	map;
-	t_img	img;
+	t_all_imgs	img;
 	int		finish;
 	int		steps;
 	int		init_game;
@@ -97,14 +88,14 @@ int		key_event_handler(int keycode, t_game *game);
 int		update(t_game *game);
 //mlx
 void	start_window(t_game *game);
-t_img	put_image(void *mlx);
+t_all_imgs	put_image(void *mlx);
 void	print_sprites(t_game *game, int line, int column);
 //game
 void	game_start_struct(t_game *game);
 int		start_game(t_game *game, int argc, char **argv);
 //game utils
 void	free_map(char **map, t_map *map_struct);
-int		error_msg(char *msg);
+int		error_msg(char *msg, t_map *map_struct);
 void	display_game_text(t_game *game);
 void	end_game(t_game *game);
 //map
@@ -118,7 +109,7 @@ int		check_args(int argc, char *map_file);
 int		check_elements(t_map *map);
 int		verify_elements(t_map *map);
 //map utils
-char	**map_malloc(char *path, t_map *map_struct);
+char	**map_malloc(char **map, char *path, t_map *map_struct);
 void	player_starting_pos(t_map *map, int line, int col);
 int		valid_map_element(char c);
 

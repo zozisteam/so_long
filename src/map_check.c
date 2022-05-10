@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:31:24 by apple             #+#    #+#             */
-/*   Updated: 2022/05/06 22:01:10 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:33:34 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	check_elements(t_map *map)
 			if (map->map[line][col] == 'P')
 				player_starting_pos(map, line, col);
 			if (map->map[line][col] == 'C')
-				map->check.collect++;
+				map->collect++;
 			if (map->map[line][col] == 'E')
-				map->check.exit++;
+				map->exit++;
 			if (!valid_map_element(map->map[line][col]))
 				return (0);
 			col++;
@@ -43,20 +43,38 @@ int	verify_elements(t_map *map)
 	int	valid;
 
 	valid = 1;
-	if (map->check.exit < 1)
-		valid = error_msg("make sure there is at least 1 exit");
-	if (map->check.collect < 1)
-		valid = error_msg("make sure there is at least 1 collectible");
-	if (map->check.player != 1)
-		valid = error_msg("only 1 player allowed");
+	if (map->exit < 1)
+		valid = error_msg("make sure there is at least 1 exit", &map);
+	if (map->collect < 1)
+		valid = error_msg("make sure there is at least 1 collectible", &map);
+	if (map->player_count != 1)
+		valid = error_msg("only 1 player allowed", &map);
 	return (valid);
 }
 
-int	check_extension(char *map_file)
+/*check extension of map file with ".ber" which is 4 char long
+check from len(file) - 4 (which should give last 4 char that
+should == ".ber" in the end)*/
+int	check_extension(char *map_file, char *ext)
 {
-	(void)(map_file);
-	//do strstr but make sure that after ".ber" its a null byte
-	return (1);
+	int	file_len;
+	int	offset;
+	int i;
+
+	i = 0;
+	file_len = ft_strlen(map_file);
+	offset = file_len - ft_strlen(ext);
+	if (file_len > 4)
+	{
+		while (i < ft_strlen(ext) && map_file[i + offset] != '\0')
+		{
+			if (map_file[i + offset] != ext[i])
+				return (0);
+			i++;
+		}
+		return (1);
+	}
+	return (0);
 }
 
 int	check_walls_helper(char *map_line, int line)
@@ -91,11 +109,11 @@ int	check_walls(char **map, t_map *map_struct)
 		if (i == 0 || i == map_struct->line - 1) //if first or last line
 		{
 			if (!check_walls_helper(map[i], 1))
-				return (error_msg("inavlid map :( check walls"));
+				return (error_msg("inavlid map :( check walls", &map_struct));
 		}
 		else
 			if (!check_walls_helper(map[i], 0)) // if middle lines
-				return (error_msg("inavlid map :( check walls"));
+				return (error_msg("inavlid map :( check walls", &map_struct));
 		i++;
 	}
 	map_struct->valid = 1;

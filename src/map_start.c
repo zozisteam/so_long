@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/05/06 22:02:34 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:50:15 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	map_start_struct(t_map *map)
 {
-	map->check.collect = 0;
-	map->check.exit = 0;
-	map->check.player = 0;
-	map->end_col = 0;
+	map->collect = 0;
+	map->exit = 0;
+	map->player_count = 0;
 	map->column = 0;
 	map->line = 0;
 	map->valid = 1;
@@ -27,9 +26,9 @@ void	map_start_struct(t_map *map)
 int	check_args(int argc, char *map_file)
 {
 	if (argc == 1)
-		return (error_msg("no map file :("));
+		return (error_msg("no map file :(", 0));
 	if (check_extension(map_file) == 0)
-		return (error_msg("wrong file extension :( no map file"));
+		return (error_msg("wrong file extension :( no map file", 0));
 	if (argc > 2)
 		ft_printf("warning\nonly first file will be used\n");
 	return (1);
@@ -43,12 +42,11 @@ char	**read_map(char *path, t_map *map_struct)
 	char	**map;
 	int		i;
 
-	map = map_malloc(path, map_struct);
+	map_malloc(&map, path, map_struct);
 	if (!map)
 		return (0);
 	i = 0;
 	fd = open(path, O_RDONLY);
-	//count how many lines (loop gnl and update lines)
 	while (i < map_struct->line)
 	{
 		map[i] = get_next_line(fd);
@@ -59,7 +57,7 @@ char	**read_map(char *path, t_map *map_struct)
 	if (!map_struct->valid)
 	{
 		free_map(map, map_struct);
-		error_msg("invalid map :(");
+		error_msg("invalid map :(", &map_struct);
 		return (0);
 	}
 	close(fd);

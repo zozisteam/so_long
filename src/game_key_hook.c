@@ -6,26 +6,26 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:46:13 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/06 22:34:08 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/07 20:00:49 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//put this in images
-void	update_direction(int key, t_game *game)
-{
-	if (key == UP)
-		game->side = UP;
-	if (key == DOWN)
-		game->side = DOWN;
-	if (key == LEFT)
-		game->side = LEFT;
-	if (key == RIGHT)
-		game->side = RIGHT;
-	//or
-	//game->side = key;
-}
+// //put this in images
+// void	update_direction(int key, t_game *game)
+// {
+// 	if (key == UP)
+// 		game->side = UP;
+// 	if (key == DOWN)
+// 		game->side = DOWN;
+// 	if (key == LEFT)
+// 		game->side = LEFT;
+// 	if (key == RIGHT)
+// 		game->side = RIGHT;
+// 	//or
+// 	//game->side = key;
+// }
 
 int	can_move(t_game *game, int line, int col, int key)
 {
@@ -33,7 +33,7 @@ int	can_move(t_game *game, int line, int col, int key)
 		return (0);
 	if (game->map.map[line][col] == '1')
 		return (0);
-	if (game->map.map[line][col] == 'E' && game->map.check.collect == 0)
+	if (game->map.map[line][col] == 'E' && game->map.collect == 0)
 		game->finish = 1;
 	if (game->finish)
 		return (0);
@@ -51,16 +51,18 @@ void	move_player(t_game *game, int line, int col, int key)
 	y = game->map.player.y;
 	x = game->map.player.x;
 	//update where player is facing depending on key pressed (maybe needs change bcz redund)
-	update_direction(key, game);
+	game->side = key;
 	if (can_move(game, line, col, key) && !game->finish)
 	{
 		if (game->map.map[line][col] == 'C')
-			game->map.check.collect--; //if we move to collectible we decrement
-		game->map.map[y][x] = '0'; //old pos will be empty
+			game->map.collect--; //if we move to collectible we decrement
+		game->map.map[game->map.player.y][game->map.player.x] = '0'; //old pos will be empty
 		game->map.map[line][col] = 'P'; //new pos will be player
 		game->map.player.y = line; //update player x and y
 		game->map.player.x = col;
 		game->steps++; //increment steps
+		ft_printf("Steps: %d\n", game->steps);
+		print_map(game);
 	}
 }
 

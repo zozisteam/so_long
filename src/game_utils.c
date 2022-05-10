@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:33:42 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/06 21:54:33 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/07 20:29:14 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int	close_window(t_game *game)
 	free_map(game->map.map, &game->map);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
-}
+}s
 
-int	error_msg(char *msg)
+int	error_msg(char *msg, t_map *map_struct)
 {
+	if (map_struct)
+		map_struct->valid = 0;
 	ft_printf("Error\n*%s*\n", msg);
 	return (0);
 }

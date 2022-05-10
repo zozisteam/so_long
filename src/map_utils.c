@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:27:51 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/06 22:19:34 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:36:53 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	map_count_columns(char *path, t_map *map_struct)
 	while (i < map_struct->line)
 	{
 		if (ft_strlen(line) != ft_strlen(get_next_line(fd)))
-			return (error_msg("invalid map :( check map columns"));
+			return (error_msg("invalid map :( check map columns", &map_struct));
 		i++;
 	}	
 	map_struct->column = ft_strlen(line);
@@ -62,10 +62,8 @@ int	map_count_columns(char *path, t_map *map_struct)
 
 /* mem allocation for map.map which will be returned */
 /* done by counting lines and columns in .ber file */
-char	**map_malloc(char *path, t_map *map_struct)
+char	**map_malloc(char **map, char *path, t_map *map_struct)
 {
-	char	**map;
-
 	map_struct->line = map_count_lines(path, map_struct);
 	map_struct->column = map_count_columns(path, map_struct);
 	if (map_struct->valid <= 0)
@@ -80,7 +78,7 @@ char	**map_malloc(char *path, t_map *map_struct)
 
 void	player_starting_pos(t_map *map, int line, int col)
 {
-	map->check.player++;
+	map->player_count++;
 	map->player.x = col;
 	map->player.y = line;
 }
