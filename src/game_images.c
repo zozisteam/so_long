@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 05:56:43 by apple             #+#    #+#             */
-/*   Updated: 2022/05/10 14:30:04 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/11 18:51:20 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	start_window(t_game *game)
 	game->win = mlx_new_window(game->mlx, x, y, "so_long");
 }
 
+//struct t_all_imgs img will contain all the img files we will need
+//will be stored there throughout program.
 t_all_imgs	put_image(void *mlx)
 {
 	t_all_imgs	*img;
@@ -46,6 +48,8 @@ t_all_imgs	put_image(void *mlx)
 	return (*img);
 }
 
+//print the player pic according to which side he is facing
+//and walking to
 void	print_player(t_game *game, int x, int y)
 {
 	if (game->side == DOWN)
@@ -76,11 +80,10 @@ void	print_sprites(t_game *game, int line, int column)
 		print_player(game, x, y);
 	if (game->map.map[line][column] == '1')
 		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.wall, x, y);
-//	if (game->map.map[line][column] == '0')
-		//mlx_put_image_to_window(&game->mlx, &game->win, &game->img.emp, x, y);
 	if (game->map.map[line][column] == 'E')
 		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.exit, x, y);
 	if (game->map.map[line][column] == 'C')
 		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.item, x, y);
 }
-
+//	if (game->map.map[line][column] == '0')
+		//mlx_put_image_to_window(&game->mlx, &game->win, &game->img.emp, x, y);
