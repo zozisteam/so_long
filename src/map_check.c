@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:31:24 by apple             #+#    #+#             */
-/*   Updated: 2022/05/10 14:32:02 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/22 00:57:58 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	check_elements(t_map *map)
 	int	col;
 
 	line = 0;
-	while (map->map[line][0] != 0)
+	while (map->map[line])
 	{
 		col = 0;
-		while (map->map[line][col] != 0 && map->map[line][col] != '\n')
+		while (map->map[line][col])
 		{
 			if (map->map[line][col] == 'P')
 				player_starting_pos(map, line, col);
@@ -40,16 +40,13 @@ int	check_elements(t_map *map)
 
 int	verify_elements(t_map *map)
 {
-	int	valid;
-
-	valid = 1;
 	if (map->exit < 1)
-		valid = error_msg("make sure there is at least 1 exit", map);
+		return(error_msg("make sure there is at least 1 exit", map));
 	if (map->collect < 1)
-		valid = error_msg("make sure there is at least 1 collectible", map);
+		return(error_msg("make sure there is at least 1 collectible", map));
 	if (map->player_count != 1)
-		valid = error_msg("only 1 player allowed", map);
-	return (valid);
+		return(error_msg("only 1 player allowed", map));
+	return (1);
 }
 
 /*check extension of map file with ".ber" which is 4 char long
@@ -84,7 +81,7 @@ int	check_walls_helper(char *map_line, int line)
 	i = 0;
 	if (line == 0) //middle lines
 	{
-		if (map_line[0] != '1' && map_line[ft_strlen(map_line) - 1] != '1')
+		if (map_line[0] != '1' || map_line[ft_strlen(map_line) - 1] != '1')
 			return (0);
 	}
 	if (line == 1) //first/last line
@@ -99,7 +96,7 @@ int	check_walls_helper(char *map_line, int line)
 	return (1);
 }
 
-int	check_walls(char **map, t_map *map_struct)
+int	check_walls(t_map *map_struct)
 {
 	int	i;
 
@@ -108,14 +105,13 @@ int	check_walls(char **map, t_map *map_struct)
 	{
 		if (i == 0 || i == map_struct->line - 1) //if first or last line
 		{
-			if (!check_walls_helper(map[i], 1))
+			if (!check_walls_helper(map_struct->map[i], 1))
 				return (error_msg("inavlid map :( check walls", map_struct));
 		}
 		else
-			if (!check_walls_helper(map[i], 0)) // if middle lines
+			if (!check_walls_helper(map_struct->map[i], 0)) // if middle lines
 				return (error_msg("inavlid map :( check walls", map_struct));
 		i++;
 	}
-	map_struct->valid = 1;
 	return (1);
 }

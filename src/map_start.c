@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/05/10 14:36:28 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/22 01:01:41 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,47 +34,56 @@ int	check_args(int argc, char *map_file)
 	return (1);
 }
 
-/* read the map by gnl and storing it into **map */
-/* then we check the walls of the map for '1's */
-char	**read_map(char *path, t_map *map_struct)
+void	freeline(char *map, char *line, int fd)
 {
-	int		fd;
-	char	**map;
-	int		i;
-
-	map = NULL;
-	map_malloc(map, path, map_struct);
-	if (!map)
-		return (0);
-	i = 0;
-	fd = open(path, O_RDONLY);
-	while (i < map_struct->line)
-	{
-		map[i] = get_next_line(fd);
-		i++;
-	}
-	map[i] = NULL;
-	check_walls(map, map_struct);
-	if (!map_struct->valid)
-	{
-		free_map(map, map_struct);
-		error_msg("invalid map :(", map_struct);
-		return (0);
-	}
-	close(fd);
-	return (map);
+	if (map)
+		free(map);
+	free (line);
+	close (fd);
 }
 
-/* check if args are valid then read map into char **map */
-/* to  start the map struct for game struct*/
-char	**start_map(t_game *game, int argc, char **argv)
+int	is_map_ok(char *map, t_map *map_struct)
 {
-	char	**map;
+	if (!map || !map[0])
+		return (0);
+	map_struct->map = ft_split(map, '\n');
+	if (!map_struct->map)
+		return (0);
+	if (!map_count_lines(map_struct))
+		return (0);
+	if (!map_count_columns(map_struct))
+		return (0);
+	if (!check_elements(map_struct) || !verify_elements(map_struct))
+		return (0);
+	return (1);
+}
 
-	if (!check_args(argc, argv[1]))
+/* read the map by gnl and storing it into **map */
+/* then we check the walls of the map for '1's */
+int	read_map(char *path, t_map *map_struct)
+{
+	int		fd;
+	char	*line;
+	char	*map;
+	int		i;
+
+	fd = open (path, O_RDONLY);
+	map = NULL;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		if (line[0] == '\n')
+		{
+			freeline(map, line, fd);
+			return (0);
+		}
+		map = ft_strjoin(map, line);
+		free (line);
+	}
+	close(fd);
+	if (!is_map_ok(map, map_struct))
 		return (0);
-	map = read_map(argv[1], &game->map);
-	if (!map)
-		return (0);
-	return (map);
+	return (1);
 }

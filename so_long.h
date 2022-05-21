@@ -89,23 +89,22 @@ void		print_sprites(t_game *game, int line, int column);
 void		game_start_struct(t_game *game);
 int			game_start(t_game *game, int argc, char **argv);
 //game utils
-void		free_map(char **map, t_map *map_struct);
+void		free_map(char *map);
 int			error_msg(char *msg, t_map *map_struct);
 void		display_game_text(t_game *game);
 void		end_game(t_game *game);
 //map
 char		**start_map(t_game *game, int argc, char **argv);
 void		map_start_struct(t_map *map);
-char		**read_map(char *path, t_map *map_struct);
+int			read_map(char *path, t_map *map_struct);
 void		print_map(t_game *game);
 //map check
-int			check_walls(char **map, t_map *map_struct);
+int			check_walls(t_map *map_struct);
 int			check_args(int argc, char *map_file);
 int			check_elements(t_map *map);
 int			verify_elements(t_map *map);
 int			check_extension(char *map_file, char *ext);
 //map utils
-char		**map_malloc(char **map, char *path, t_map *map_struct);
 void		player_starting_pos(t_map *map, int line, int col);
 int			valid_map_element(char c);
 
