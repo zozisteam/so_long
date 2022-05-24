@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:33:42 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/15 11:14:26 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:45:54 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_map(char **map)
 
 	i = 0;
 	while (map[i])
-		free(map[i++]);
+		free((void *)map[i++]);
 	free(map[i]);
 	free(map);
 }

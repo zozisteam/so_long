@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/21 22:56:12 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:50:36 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if(!check_args(argc, argv[1]))
+	if (!check_args(argc, argv[1]))
 		return (0);
 	game_start_struct(&game);
-	if (game_start(&game, argc, argv) == 0)
+	if (game_start(&game, argv) == 0)
 		return (0);
 	mlx_hook(game.win, 17, 0, close_window, (void *)&game);
 	mlx_hook(game.win, 2, 0, key_event_handler, (void *)&game);

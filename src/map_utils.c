@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:27:51 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/22 00:59:31 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:47:24 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ int	map_count_lines(t_map *map_struct)
 /*  */
 int	map_count_columns(t_map *map_struct)
 {
-	int		fd;
-	char	*line;
-	char	*nextline;
 	int		i;
 
 	i = 0;

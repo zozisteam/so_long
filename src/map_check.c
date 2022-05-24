@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:31:24 by apple             #+#    #+#             */
-/*   Updated: 2022/05/22 00:57:58 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/24 13:15:05 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	check_elements(t_map *map)
 		{
 			if (map->map[line][col] == 'P')
 				player_starting_pos(map, line, col);
-			if (map->map[line][col] == 'C')
+			else if (map->map[line][col] == 'C')
 				map->collect++;
-			if (map->map[line][col] == 'E')
+			else if (map->map[line][col] == 'E')
 				map->exit++;
-			if (!valid_map_element(map->map[line][col]))
+			else if (!valid_map_element(map->map[line][col]))
 				return (0);
 			col++;
 		}
@@ -41,11 +41,13 @@ int	check_elements(t_map *map)
 int	verify_elements(t_map *map)
 {
 	if (map->exit < 1)
-		return(error_msg("make sure there is at least 1 exit", map));
+		return (error_msg("make sure there is at least 1 exit", map));
 	if (map->collect < 1)
-		return(error_msg("make sure there is at least 1 collectible", map));
+		return (error_msg("make sure there is at least 1 collectible", map));
+	if (map->player_count == 0)
+		return (error_msg("no player found", map));
 	if (map->player_count != 1)
-		return(error_msg("only 1 player allowed", map));
+		return (error_msg("only 1 player allowed", map));
 	return (1);
 }
 

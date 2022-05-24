@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 05:56:43 by apple             #+#    #+#             */
-/*   Updated: 2022/05/11 18:51:20 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:36:13 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,22 @@ void	start_window(t_game *game)
 
 //struct t_all_imgs img will contain all the img files we will need
 //will be stored there throughout program.
-t_all_imgs	put_image(void *mlx)
+void	put_image(void *mlx, t_all_imgs img)
 {
-	t_all_imgs	*img;
-
-	img = NULL;
-	img->wall.img = mlx_xpm_file_to_image(mlx, PATH_WALL, &img->wall.size.x,
-			&img->wall.size.y);
-	img->exit.img = mlx_xpm_file_to_image(mlx, PATH_EXIT, &img->exit.size.x,
-			&img->exit.size.y);
-	img->item.img = mlx_xpm_file_to_image(mlx, PATH_ITEM, &img->item.size.x,
-			&img->item.size.y);
-	img->pdown.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN,
-			&img->pdown.size.x, &img->pdown.size.y);
-	img->pup.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_UP,
-			&img->pup.size.x, &img->pup.size.y);
-	img->pleft.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_LEFT,
-			&img->pleft.size.x, &img->pleft.size.y);
-	img->pright.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN,
-			&img->pright.size.x, &img->pright.size.y);
-	return (*img);
+	img.wall.img = mlx_xpm_file_to_image(mlx, PATH_WALL, &img.wall.size.x,
+			&img.wall.size.y);
+	img.exit.img = mlx_xpm_file_to_image(mlx, PATH_EXIT, &img.exit.size.x,
+			&img.exit.size.y);
+	img.item.img = mlx_xpm_file_to_image(mlx, PATH_ITEM, &img.item.size.x,
+			&img.item.size.y);
+	img.pdown.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN,
+			&img.pdown.size.x, &img.pdown.size.y);
+	img.pup.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_UP,
+			&img.pup.size.x, &img.pup.size.y);
+	img.pleft.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_LEFT,
+			&img.pleft.size.x, &img.pleft.size.y);
+	img.pright.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN,
+			&img.pright.size.x, &img.pright.size.y);
 }
 
 //print the player pic according to which side he is facing

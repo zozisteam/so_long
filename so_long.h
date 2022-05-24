@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/24 11:49:08 by alalmazr          #+#    #+#             */
+/*   Updated: 2022/05/24 13:18:34 by alalmazr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -57,7 +69,6 @@ typedef struct s_img
 typedef struct s_all_imgs
 {
 	t_img	wall;
-//	t_img	emp;
 	t_img	exit;
 	t_img	pdown;
 	t_img	pup;
@@ -83,13 +94,13 @@ int			key_event_handler(int keycode, t_game *game);
 int			update(t_game *game);
 //mlx
 void		start_window(t_game *game);
-t_all_imgs	put_image(void *mlx);
+void		put_image(void *mlx, t_all_imgs img);
 void		print_sprites(t_game *game, int line, int column);
 //game
 void		game_start_struct(t_game *game);
-int			game_start(t_game *game, int argc, char **argv);
+int			game_start(t_game *game, char **argv);
 //game utils
-void		free_map(char *map);
+void		free_map(char **map);
 int			error_msg(char *msg, t_map *map_struct);
 void		display_game_text(t_game *game);
 void		end_game(t_game *game);
@@ -107,5 +118,7 @@ int			check_extension(char *map_file, char *ext);
 //map utils
 void		player_starting_pos(t_map *map, int line, int col);
 int			valid_map_element(char c);
+int			map_count_lines(t_map *map_struct);
+int			map_count_columns(t_map *map_struct);
 
 #endif
