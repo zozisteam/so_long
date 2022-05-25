@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 06:42:03 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/07 05:09:35 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 11:56:13 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	print_map(t_game *game)
 	int		col;
 
 	line = 0;
-	while (line < game->map.line)
+	while (game->map.map[line])
 	{
 		col = 0;
-		while (col < game->map.column)
+		while (game->map.map[line][col])
 		{
 			print_sprites(game, line, col);
 			col++;

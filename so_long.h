@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:49:08 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/24 13:18:34 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:38:09 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@
 # define PATH_PLAYER_UP "./files_img/player_up.xpm"
 # define PATH_PLAYER_RIGHT "./files_img/player_right.xpm"
 # define PATH_PLAYER_LEFT "./files_img/player_left.xpm"
-# define PATH_ITEM "./files_img/potion.xpm"
+# define PATH_ITEM "./files_img/item.xpm"
+# define PATH_EMPTY "./files_img/empty.xpm"
 //defining keys
-# define UP 0x77
-# define DOWN 0x73
-# define LEFT 0x61
-# define RIGHT 0x64
-# define ESC 0xff1b
+# define UP 13
+# define DOWN 1
+# define LEFT 0
+# define RIGHT 2
+# define ESC 53
 
 //my xpm images are 50*50
 # define TILES 50
@@ -81,6 +82,7 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	void		*img;
 	t_map		map;
 	t_all_imgs	img;
 	int			finish;
@@ -94,7 +96,7 @@ int			key_event_handler(int keycode, t_game *game);
 int			update(t_game *game);
 //mlx
 void		start_window(t_game *game);
-void		put_image(void *mlx, t_all_imgs img);
+void		put_image(t_game *game, char *path, int line, int col);
 void		print_sprites(t_game *game, int line, int column);
 //game
 void		game_start_struct(t_game *game);

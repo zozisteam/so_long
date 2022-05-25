@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:55:34 by apple             #+#    #+#             */
-/*   Updated: 2022/05/24 13:59:52 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:02:56 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ void	game_start_struct(t_game *game)
 	game->finish = 0;
 	game->steps = 0;
 	game->init_game = 0;
+	game->side = DOWN;
+}
+
+void	map_start_struct(t_map *map)
+{
+	map->collect = 0;
+	map->exit = 0;
+	map->player_count = 0;
+	map->column = 0;
+	map->line = 0;
+	map->valid = 1;
 }
 
 /* start game by creating t_map variable and initializing it */
@@ -33,8 +44,6 @@ int	game_start(t_game *game, char **argv)
 		return (0);
 	start_window(game);
 	printf("*\n"); //where segfault is around
-	put_image(game->mlx, game->img);
-	game->side = DOWN;
 	print_map(game);
 	game->init_game = 1;
 	return (1);

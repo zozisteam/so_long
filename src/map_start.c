@@ -6,21 +6,11 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/05/24 13:59:45 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:02:26 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-void	map_start_struct(t_map *map)
-{
-	map->collect = 0;
-	map->exit = 0;
-	map->player_count = 0;
-	map->column = 0;
-	map->line = 0;
-	map->valid = 1;
-}
 
 /* check argc and the map extension */
 int	check_args(int argc, char *map_file)

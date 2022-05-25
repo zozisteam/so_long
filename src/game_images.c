@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 05:56:43 by apple             #+#    #+#             */
-/*   Updated: 2022/05/24 12:36:13 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:37:42 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,71 +15,68 @@
 /*start the window using mlx_init and mlx_new_win*/
 void	start_window(t_game *game)
 {
-	int	x;
-	int	y;
+	int	width;
+	int	height;
 
-	x = game->map.column * TILES;
-	y = game->map.line * TILES;
+	width = game->map.column * TILES;
+	height = game->map.line * TILES;
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, x, y, "so_long");
-}
-
-//struct t_all_imgs img will contain all the img files we will need
-//will be stored there throughout program.
-void	put_image(void *mlx, t_all_imgs img)
-{
-	img.wall.img = mlx_xpm_file_to_image(mlx, PATH_WALL, &img.wall.size.x,
-			&img.wall.size.y);
-	img.exit.img = mlx_xpm_file_to_image(mlx, PATH_EXIT, &img.exit.size.x,
-			&img.exit.size.y);
-	img.item.img = mlx_xpm_file_to_image(mlx, PATH_ITEM, &img.item.size.x,
-			&img.item.size.y);
-	img.pdown.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN,
-			&img.pdown.size.x, &img.pdown.size.y);
-	img.pup.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_UP,
-			&img.pup.size.x, &img.pup.size.y);
-	img.pleft.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_LEFT,
-			&img.pleft.size.x, &img.pleft.size.y);
-	img.pright.img = mlx_xpm_file_to_image(mlx, PATH_PLAYER_DOWN,
-			&img.pright.size.x, &img.pright.size.y);
-}
-
-//print the player pic according to which side he is facing
-//and walking to
-void	print_player(t_game *game, int x, int y)
-{
-	if (game->side == DOWN)
-		mlx_put_image_to_window(&game->mlx, &game->win,
-			&game->img.pdown, x, y);
-	if (game->side == UP)
-		mlx_put_image_to_window(&game->mlx, &game->win,
-			&game->img.pup, x, y);
-	if (game->side == LEFT)
-		mlx_put_image_to_window(&game->mlx, &game->win,
-			&game->img.pleft, x, y);
-	if (game->side == RIGHT)
-		mlx_put_image_to_window(&game->mlx, &game->win,
-			&game->img.pright, x, y);
+	game->win = mlx_new_window(game->mlx, width, height, "so_long");
 }
 
 //mlx_put_image_to_window(mlx_ptr, win_ptr, img, x, y).
 //The (x , y) coordinates define where the image should be
 //placed in the window.
-void	print_sprites(t_game *game, int line, int column)
+void	put_image(t_game *game, char *path, int line, int col)
 {
-	int	x;
-	int	y;
+	int width;
+	int height;
+	int x;
+	int y;
 
-	x = column * TILES;
+	width = 0;
+	height = 0;
+	x = col * TILES;
 	y = line * TILES;
-	if (game->map.map[line][column] == 'P')
-		print_player(game, x, y);
-	if (game->map.map[line][column] == '1')
-		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.wall, x, y);
-	if (game->map.map[line][column] == 'E')
-		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.exit, x, y);
-	if (game->map.map[line][column] == 'C')
-		mlx_put_image_to_window(&game->mlx, &game->win, &game->img.item, x, y);
+	game->img = mlx_xpm_file_to_image(game->mlx, path, &width, &height);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, x, y);
 }
-//	if (game->map.map[line][column] == '0')
-		//mlx_put_image_to_window(&game->mlx, &game->win, &game->img.emp, x, y);
+
+//print the player pic according to which side he is facing
+//and walking to
+//put player***
+void	print_player(t_game *game, char *path, int line, int col)
+{
+	if (game->side == DOWN)
+		put_image(game, PATH_PLAYER_DOWN, line, col);
+	if (game->side == UP)
+		put_image(game, PATH_PLAYER_UP, line, col);
+	if (game->side == LEFT)
+		put_image(game, PATH_PLAYER_LEFT, line, col);
+	if (game->side == RIGHT)
+		put_image(game, PATH_PLAYER_RIGHT, line, col);
+}
+
+
+void	print_sprites(t_game *game, int line, int col)
+{
+	if (game->map.map[line][col] == '1')
+		put_image(game, PATH_WALL, line, col);
+	if (game->map.map[line][col] == '0')
+		put_image(game, PATH_EMPTY, line, col);
+	if (game->map.map[line][col] == 'P')
+	{
+		put_image(game, PATH_EMPTY, line, col);
+		put_player(game, PATH_PLAYER_DOWN, line, col);
+	}
+	if (game->map.map[line][col] == 'E')
+	{
+		put_image(game, PATH_EMPTY, line, col);
+		put_image(game, PATH_EXIT, line, col);
+	}
+	if (game->map.map[line][col] == 'C')
+	{
+		put_image(game, PATH_EMPTY, line, col);
+		put_image(game, PATH_ITEM, line, col);
+	}
+}
