@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:55:34 by apple             #+#    #+#             */
-/*   Updated: 2022/05/25 13:02:56 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:12:19 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	game_start(t_game *game, char **argv)
 	if (!read_map(argv[1], &game->map))
 		return (0);
 	start_window(game);
-	printf("*\n"); //where segfault is around
 	print_map(game);
 	game->init_game = 1;
 	return (1);

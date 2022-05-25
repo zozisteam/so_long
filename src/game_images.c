@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 05:56:43 by apple             #+#    #+#             */
-/*   Updated: 2022/05/25 13:37:42 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 15:58:37 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	put_image(t_game *game, char *path, int line, int col)
 //print the player pic according to which side he is facing
 //and walking to
 //put player***
-void	print_player(t_game *game, char *path, int line, int col)
+void	put_player(t_game *game, int line, int col)
 {
 	if (game->side == DOWN)
 		put_image(game, PATH_PLAYER_DOWN, line, col);
@@ -57,7 +57,6 @@ void	print_player(t_game *game, char *path, int line, int col)
 		put_image(game, PATH_PLAYER_RIGHT, line, col);
 }
 
-
 void	print_sprites(t_game *game, int line, int col)
 {
 	if (game->map.map[line][col] == '1')
@@ -67,7 +66,7 @@ void	print_sprites(t_game *game, int line, int col)
 	if (game->map.map[line][col] == 'P')
 	{
 		put_image(game, PATH_EMPTY, line, col);
-		put_player(game, PATH_PLAYER_DOWN, line, col);
+		put_player(game, line, col);
 	}
 	if (game->map.map[line][col] == 'E')
 	{

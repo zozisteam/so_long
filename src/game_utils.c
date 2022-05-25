@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:33:42 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/24 11:45:54 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:13:47 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ void	free_map(char **map)
 	free(map);
 }
 
-//***under process
-int	close_window(t_game *game)
-{
-	free_map(game->map.map);
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
-}
-
 int	error_msg(char *msg, t_map *map_struct)
 {
 	if (map_struct)
@@ -40,11 +32,13 @@ int	error_msg(char *msg, t_map *map_struct)
 }
 
 //***under process
-void	end_game(t_game *game)
+int	end_game(t_game *game)
 {
 	if (game->finish)
 		ft_printf("you win :)\n");
 	else
 		ft_printf("you lose :(\n");
-	close_window(game);
+	free_map(game->map.map);
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
 }

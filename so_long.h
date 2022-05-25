@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:49:08 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/25 13:38:09 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:14:04 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,12 @@ typedef struct s_game
 	void		*win;
 	void		*img;
 	t_map		map;
-	t_all_imgs	img;
 	int			finish;
 	int			steps;
 	int			init_game;
 	int			side;
 }				t_game;
 //hooks
-int			close_window(t_game *game);
 int			key_event_handler(int keycode, t_game *game);
 int			update(t_game *game);
 //mlx
@@ -105,7 +103,7 @@ int			game_start(t_game *game, char **argv);
 void		free_map(char **map);
 int			error_msg(char *msg, t_map *map_struct);
 void		display_game_text(t_game *game);
-void		end_game(t_game *game);
+int			end_game(t_game *game);
 //map
 char		**start_map(t_game *game, int argc, char **argv);
 void		map_start_struct(t_map *map);

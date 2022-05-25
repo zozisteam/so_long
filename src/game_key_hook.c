@@ -6,26 +6,11 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:46:13 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/11 19:25:05 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:10:59 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-// //put this in images
-// void	update_direction(int key, t_game *game)
-// {
-// 	if (key == UP)
-// 		game->side = UP;
-// 	if (key == DOWN)
-// 		game->side = DOWN;
-// 	if (key == LEFT)
-// 		game->side = LEFT;
-// 	if (key == RIGHT)
-// 		game->side = RIGHT;
-// 	//or
-// 	//game->side = key;
-// }
 
 //check the coordinates (line,col) if it is a valid
 //position for the player to go to (eg. not a wall, not
@@ -38,7 +23,10 @@ int	can_move(t_game *game, int line, int col, int key)
 	if (game->map.map[line][col] == '1')
 		return (0);
 	if (game->map.map[line][col] == 'E' && game->map.collect == 0)
+	{
 		game->finish = 1;
+		end_game(game);
+	}
 	if (game->finish)
 		return (0);
 	if (game->map.map[line][col] == 'E')
@@ -89,7 +77,7 @@ int	key_event_handler(int key, t_game *game)
 	line = game->map.player.y;
 	col = game->map.player.x;
 	if (key == ESC || game->finish)
-		close_window(game);
+		end_game(game);
 	if (key == UP)
 		line--;
 	if (key == DOWN)
@@ -101,10 +89,3 @@ int	key_event_handler(int key, t_game *game)
 	move_player(game, line, col, key);
 	return (1);
 }
-
-// int	update(t_game *game)
-// {
-// 	if (game->finish)
-// 		close_window(game);
-// 	return (0);
-// }
