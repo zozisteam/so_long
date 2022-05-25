@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   game_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:27:51 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/24 11:47:24 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/26 00:48:49 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ int	map_count_lines(t_map *map_struct)
 		i++;
 	map_struct->line = i;
 	if (i <= 0)
-	{
-		map_struct->valid = 0;
 		return (0);
-	}
 	return (i);
 }
 
@@ -43,7 +40,7 @@ int	map_count_columns(t_map *map_struct)
 	while (i < map_struct->line)
 	{
 		if (ft_strlen(map_struct->map[0]) != ft_strlen(map_struct->map[i]))
-			return (error_msg("invalid map :( check map columns", map_struct));
+			return (error_msg("invalid map :( check map columns"));
 		i++;
 	}	
 	map_struct->column = ft_strlen(map_struct->map[0]);
@@ -57,7 +54,7 @@ void	player_starting_pos(t_map *map, int line, int col)
 	map->player.y = line;
 }
 
-int	valid_map_element(char c)
+int	is_element_ok(char c)
 {
 	if (c == '1' || c == '0' || c == 'P' || c == 'C' || c == 'E')
 		return (1);

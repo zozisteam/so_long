@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_check.c                                        :+:      :+:    :+:   */
+/*   game_map_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:31:24 by apple             #+#    #+#             */
-/*   Updated: 2022/05/24 13:15:05 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/26 00:47:43 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	check_elements(t_map *map)
+/* The map must contain at least 1 exit, 1 collectible, and 1 
+ starting position. */
+int	verify_map_elements(t_map *map)
+{
+	if (map->exit < 1)
+		return (error_msg("make sure there is at least 1 exit"));
+	if (map->collect < 1)
+		return (error_msg("make sure there is at least 1 collectible"));
+	if (map->player_count == 0)
+		return (error_msg("no player found"));
+	if (map->player_count != 1)
+		return (error_msg("only 1 player allowed"));
+	return (1);
+}
+
+ /* count significant members of map struct such as player, 
+  collectibles, exits, and if the char within map 2d array 
+  is valid or not by calling is_element_ok(). verify_mp_elem()
+  checks if the count of everything is in accordance with game rules*/
+int	count_map_elements(t_map *map)
 {
 	int	line;
 	int	col;
@@ -29,26 +48,13 @@ int	check_elements(t_map *map)
 				map->collect++;
 			else if (map->map[line][col] == 'E')
 				map->exit++;
-			else if (!valid_map_element(map->map[line][col]))
+			else if (!is_element_ok(map->map[line][col]))
 				return (0);
 			col++;
 		}
 		line++;
 	}
-	return (1);
-}
-
-int	verify_elements(t_map *map)
-{
-	if (map->exit < 1)
-		return (error_msg("make sure there is at least 1 exit", map));
-	if (map->collect < 1)
-		return (error_msg("make sure there is at least 1 collectible", map));
-	if (map->player_count == 0)
-		return (error_msg("no player found", map));
-	if (map->player_count != 1)
-		return (error_msg("only 1 player allowed", map));
-	return (1);
+	return (verify_map_elements(map));
 }
 
 /*check extension of map file with ".ber" which is 4 char long
@@ -75,7 +81,7 @@ int	check_extension(char *map_file, char *ext)
 	}
 	return (0);
 }
-
+ /* int line parameter is 0 when its a middle line and 1 if first/last line */
 int	check_walls_helper(char *map_line, int line)
 {
 	unsigned int	i;
@@ -98,6 +104,10 @@ int	check_walls_helper(char *map_line, int line)
 	return (1);
 }
 
+/* check walls function finds out if we're on the (first or ending lines)
+  OR (middle lines). depending on which case it calls its helper function
+  and passes the current line to check all '1's if its the first case OR 
+  '1's only on edges of line if its the other case.*/
 int	check_walls(t_map *map_struct)
 {
 	int	i;
@@ -108,11 +118,11 @@ int	check_walls(t_map *map_struct)
 		if (i == 0 || i == map_struct->line - 1) //if first or last line
 		{
 			if (!check_walls_helper(map_struct->map[i], 1))
-				return (error_msg("inavlid map :( check walls", map_struct));
+				return (error_msg("inavlid map :( check walls"));
 		}
 		else
 			if (!check_walls_helper(map_struct->map[i], 0)) // if middle lines
-				return (error_msg("inavlid map :( check walls", map_struct));
+				return (error_msg("inavlid map :( check walls"));
 		i++;
 	}
 	return (1);

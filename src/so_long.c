@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/25 16:14:46 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/25 23:43:39 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 // #include "../libft/get_next_line_utils.c"
 // #include "../libft/get_next_line.c"
 
-//declare game struct then initialize to 0's
-//check game_start if 1 then started and window is there..
+//declare game struct then initialize to with game_start_struct()
+//we call check_args to check arg count & .ber extension of map file
+//game_start will initialize all the windows and read map and print it
 //mlxhook (check supported events and their corresponding number)
-//mlxhook--> 0->when destroy (3rd arg is useless)
-//mlxhook--> 2->when buttondown
+//mlxhook--> 17->when 'x' is pressed (3rd arg is useless)
+//mlxhook--> 2->when key is pressed 
 //mlxloop--> to wait for and recieve events
 int	main(int argc, char **argv)
 {
