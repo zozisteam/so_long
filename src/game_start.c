@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:55:34 by apple             #+#    #+#             */
-/*   Updated: 2022/05/26 00:19:38 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/28 12:20:10 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	game_start(t_game *game, char **argv)
 	map_start_struct(&map);
 	game->map = map;
 	if (!read_map(argv[1], &game->map))
-		return (0);
+		return (error_msg("Map reading failed"));
 	start_window(game);
 	print_map(game);
 	return (1);

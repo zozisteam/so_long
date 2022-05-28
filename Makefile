@@ -1,7 +1,7 @@
 NAME = so_long
 SRC = ./src/*.c
 OBJ = $(SRC:.c=.o)
-FLAGS = -Wall -Wextra -Werror #-Wformat=0
+FLAGS = -Wall -Wextra -Werror
 MLX = ./mlx/libmlx.a
 LIBFT = cd libft && make
 LIB = libft/libft.a

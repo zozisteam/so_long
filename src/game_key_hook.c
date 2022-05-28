@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 06:46:13 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/26 00:15:33 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/27 10:23:17 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	move_player(t_game *game, int line, int col, int key)
 		print_map(game);
 	}
 }
-//I DELETED THE FINISH MEMBER FROM T_GAME. MAKE SURE IT DOESNT INTERFERE (U HAVE OLD REPO IN CASE ITS SHIT)
+
 //this function handles key pressing
 //we get the pos (x,y) and store them
 //in (line,col) and depending on what key was pressed

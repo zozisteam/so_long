@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:35:45 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/25 23:43:39 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/28 12:22:45 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ int	main(int argc, char **argv)
 		return (0);
 	game_start_struct(&game);
 	if (game_start(&game, argv) == 0)
-		return (0);
-	mlx_hook(game.win, 17, 0, end_game, &game);
+		return (error_msg("Game failed to start"));
+	mlx_hook(game.win, 17, 0, close_win, &game);
 	mlx_hook(game.win, 2, 0, key_event_handler, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }
-

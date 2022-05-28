@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/05/26 00:53:44 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/28 12:22:35 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ int	is_map_ok(char *map, t_map *map_struct)
 	if (!map_struct->map)
 		return (0);
 	if (!map_count_lines(map_struct))
-		return (0);
+		return (error_msg("line error"));
 	if (!map_count_columns(map_struct))
-		return (0);
+		return (error_msg("column error"));
 	if (!count_map_elements(map_struct))
-		return (0);
-	if (!verify_map_elements(map_struct))
 		return (0);
 	return (1);
 }
@@ -82,7 +80,5 @@ int	read_map(char *path, t_map *map_struct)
 		free (line);
 	}
 	close(fd);
-	// if (!is_map_ok(map, map_struct))
-	// 	return (0);
 	return (is_map_ok(map, map_struct));
 }

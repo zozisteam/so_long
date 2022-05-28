@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:31:24 by apple             #+#    #+#             */
-/*   Updated: 2022/05/26 00:47:43 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/28 12:22:10 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	verify_map_elements(t_map *map)
 	return (1);
 }
 
- /* count significant members of map struct such as player, 
+/* count significant members of map struct such as player, 
   collectibles, exits, and if the char within map 2d array 
   is valid or not by calling is_element_ok(). verify_mp_elem()
-  checks if the count of everything is in accordance with game rules*/
+checks if the count of everything is in accordance with game rules */
 int	count_map_elements(t_map *map)
 {
 	int	line;
@@ -49,7 +49,7 @@ int	count_map_elements(t_map *map)
 			else if (map->map[line][col] == 'E')
 				map->exit++;
 			else if (!is_element_ok(map->map[line][col]))
-				return (0);
+				return (error_msg("illegal character in map"));
 			col++;
 		}
 		line++;
@@ -81,18 +81,19 @@ int	check_extension(char *map_file, char *ext)
 	}
 	return (0);
 }
- /* int line parameter is 0 when its a middle line and 1 if first/last line */
+
+/* int line parameter is 0 when its a middle line and 1 if first/last line */
 int	check_walls_helper(char *map_line, int line)
 {
 	unsigned int	i;
 
 	i = 0;
-	if (line == 0) //middle lines
+	if (line == 0)
 	{
 		if (map_line[0] != '1' || map_line[ft_strlen(map_line) - 1] != '1')
 			return (0);
 	}
-	if (line == 1) //first/last line
+	if (line == 1)
 	{
 		while (i < ft_strlen(map_line))
 		{
@@ -115,13 +116,13 @@ int	check_walls(t_map *map_struct)
 	i = 0;
 	while (i < map_struct->line)
 	{
-		if (i == 0 || i == map_struct->line - 1) //if first or last line
+		if (i == 0 || i == map_struct->line - 1)
 		{
 			if (!check_walls_helper(map_struct->map[i], 1))
 				return (error_msg("inavlid map :( check walls"));
 		}
 		else
-			if (!check_walls_helper(map_struct->map[i], 0)) // if middle lines
+			if (!check_walls_helper(map_struct->map[i], 0))
 				return (error_msg("inavlid map :( check walls"));
 		i++;
 	}

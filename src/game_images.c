@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 05:56:43 by apple             #+#    #+#             */
-/*   Updated: 2022/05/26 00:49:46 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/27 10:09:14 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	start_window(t_game *game)
 //placed in the window.
 void	put_image(t_game *game, char *path, int line, int col)
 {
-	int width;
-	int height;
-	int x;
-	int y;
+	int	width;
+	int	height;
+	int	x;
+	int	y;
 
 	width = 0;
 	height = 0;

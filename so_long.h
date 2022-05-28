@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:49:08 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/26 01:02:42 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/28 12:24:52 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_game
 }				t_game;
 //hooks
 int			key_event_handler(int keycode, t_game *game);
+int			close_win(t_game *game);
 //mlx
 void		start_window(t_game *game);
 void		put_image(t_game *game, char *path, int line, int col);
@@ -94,6 +95,7 @@ int			map_count_columns(t_map *map_struct);
 int			error_msg(char *msg);
 int			end_game(t_game *game, int done);
 void		player_starting_pos(t_map *map, int line, int col);
+void		put_player_tile(t_game *game, int line, int col);
 int			is_element_ok(char c);
 
 #endif
