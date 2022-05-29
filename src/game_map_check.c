@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:31:24 by apple             #+#    #+#             */
-/*   Updated: 2022/05/28 12:22:10 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/29 14:01:56 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	check_extension(char *map_file, char *ext)
 	size_t	i;
 
 	i = 0;
+	if ((open (map_file, O_RDONLY) < 0))
+		return (error_msg("not a valid file"));
 	file_len = ft_strlen(map_file);
 	offset = file_len - ft_strlen(ext);
 	if (file_len > 4)

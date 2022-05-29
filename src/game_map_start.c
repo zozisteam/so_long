@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:50:10 by apple             #+#    #+#             */
-/*   Updated: 2022/05/28 12:22:35 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/05/29 14:03:40 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	is_map_ok(char *map, t_map *map_struct)
 	if (!map_struct->map)
 		return (0);
 	if (!map_count_lines(map_struct))
-		return (error_msg("line error"));
+		return (0);
 	if (!map_count_columns(map_struct))
-		return (error_msg("column error"));
+		return (0);
 	if (!count_map_elements(map_struct))
 		return (0);
 	return (1);
