@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 09:29:33 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/06 19:39:54 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/06/04 11:03:10 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_printf( char *format, ...)
 		}
 		else
 			ft_putchar(format[i], &res);
-		 i++;
+		i++;
 	}
 	va_end (args);
 	return (res);

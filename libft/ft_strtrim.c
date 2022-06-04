@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:03:27 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/06 19:39:54 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/06/04 11:01:21 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	getend(char  *s1, char  *set)
+static size_t	getend(char *s1, char *set)
 {
 	size_t	len;
 	size_t	i;
@@ -28,7 +28,7 @@ static size_t	getend(char  *s1, char  *set)
 	return (len - i);
 }
 
-static size_t	getstart(char  *s1, char  *set)
+static size_t	getstart(char *s1, char *set)
 {
 	size_t	len;
 	size_t	i;
@@ -44,7 +44,7 @@ static size_t	getstart(char  *s1, char  *set)
 	return (i);
 }
 
-char	*ft_strtrim(char  *s1, char  *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	int		start;
 	int		end;

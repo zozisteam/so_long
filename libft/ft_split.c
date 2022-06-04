@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:59:42 by alalmazr          #+#    #+#             */
-/*   Updated: 2022/05/06 19:39:54 by alalmazr         ###   ########.fr       */
+/*   Updated: 2022/06/04 11:01:09 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	getnextstr(char **nextstr, unsigned int *nextstr_len, char c)
 	return ;
 }
 
-static unsigned int	wordcount(char  *str, char delimeter)
+static unsigned int	wordcount(char *str, char delimeter)
 {
 	int	flag;
 	int	wordnb;
@@ -50,7 +50,7 @@ static unsigned int	wordcount(char  *str, char delimeter)
 	return ((unsigned int)wordnb);
 }
 
-char	**ft_split(char  *string, char delimeter)
+char	**ft_split(char *string, char delimeter)
 {
 	char			**split;
 	char			*nextstr;
